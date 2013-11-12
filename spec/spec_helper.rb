@@ -32,6 +32,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # Reset database
+  config.before(:each) do
+    Mongoid::Sessions.default.collections.select {|c| c.name !~ /system/ }.each(&:drop)
+  end
+
   # Capybara
   config.include Capybara::DSL
   
