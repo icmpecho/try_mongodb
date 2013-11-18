@@ -6,7 +6,7 @@
 	<h1>Authors</h1>
 	<ul>
 	<% @authors.each do |author| %>
-		<li><%= author.name %></li>
+		<li><%= link_to author.name, url_for(author) %></li>
 	<% end %>
 	</ul>
 </body>

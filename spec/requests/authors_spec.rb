@@ -12,6 +12,10 @@ describe "Authors" do
 			expect(page).to have_content('Test')
 			expect(page).to have_content('Foo')
 		end
+		it 'have link to author pages' do
+			click_link 'Foo'
+			expect(page).to have_content('name: Foo')
+		end
 	end
 
 end

@@ -1,3 +1,3 @@
 TryMongodb::Application.routes.draw do
-  get 'authors' => 'authors#index'
+  resources :authors
 end
