@@ -1,15 +1,17 @@
 require 'spec_helper'
 
 describe "Authors" do
-	subject { page }
 	describe 'index page' do
 		before {
 			FactoryGirl.create(:author)
 			FactoryGirl.create(:author, name: 'Foo')
 			visit '/authors'
 		}
-		it { should have_content('Authors') }
-		it { should have_content('Test') }
-		it { should have_content('Foo') }
+		it 'land on correct page' do
+			expect(page).to have_content('Authors')
+			expect(page).to have_content('Test')
+			expect(page).to have_content('Foo')
+		end
 	end
+
 end
