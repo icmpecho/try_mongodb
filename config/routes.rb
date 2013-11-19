@@ -1,3 +1,3 @@
 TryMongodb::Application.routes.draw do
-  resources :authors
+  resources :authors, :books
 end
