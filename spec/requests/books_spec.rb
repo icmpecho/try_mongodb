@@ -12,6 +12,10 @@ describe "Books" do
 			expect(page).to have_content('Bar')
 			expect(page).to have_content('Baz')
 		end
+		it 'have link to book pages' do
+			click_link 'Bar'
+			expect(page).to have_content('name: Bar')
+		end
 	end
 	describe 'new page' do
 		before {
