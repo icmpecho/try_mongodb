@@ -4,6 +4,10 @@
 <% @books.each do |book| %>
 	<li>
 		<%= link_to book.name, url_for(book) %>
+		<%= form_for( book, html: { method: 'delete' } ) do |f| %>
+			<div><%= f.hidden_field :id, value: book.id %></div>
+			<div><%= f.submit "delete" %></div>
+		<% end %>
 	</li>
 <% end %>
 </ul>

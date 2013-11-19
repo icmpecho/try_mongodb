@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe "Books" do
 	describe "index page" do
+		baz = nil
 		before do
 			FactoryGirl.create(:book, name: "Bar")
-			FactoryGirl.create(:book, name: "Baz")
+			baz = FactoryGirl.create(:book, name: "Baz")
 			visit books_path
 		end
 		it 'land on correct page' do
@@ -15,6 +16,13 @@ describe "Books" do
 		it 'have link to book pages' do
 			click_link 'Bar'
 			expect(page).to have_content('name: Bar')
+		end
+		it 'have delete button that can delete book' do
+			within("\#edit_book_#{baz.id}") do
+				click_button "delete"
+			end
+			expect(page).to have_content('Books')
+			expect(page).not_to have_content('Baz')
 		end
 		it 'have a link to create new book page' do
 			click_link "Create new"
