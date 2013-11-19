@@ -1,6 +1,12 @@
 <h1>Authors</h1>
 <ul>
 <% @authors.each do |author| %>
-	<li><%= link_to author.name, url_for(author) %></li>
+	<li>
+		<%= link_to author.name, url_for(author) %>
+		<%= form_for( author, html: { method: 'delete' } ) do |f| %>
+			<div><%= f.hidden_field :id, value: author.id %></div>
+			<div><%= f.submit "delete" %></div>
+		<% end %>
+	</li>
 <% end %>
 </ul>

@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe "Authors" do
 	describe 'index page' do
+		test = nil
 		before {
-			FactoryGirl.create(:author)
+			test = FactoryGirl.create(:author)
 			FactoryGirl.create(:author, name: 'Foo')
 			visit '/authors'
 		}
@@ -15,6 +16,13 @@ describe "Authors" do
 		it 'have link to author pages' do
 			click_link 'Foo'
 			expect(page).to have_content('name: Foo')
+		end
+		it 'have delete button that can delete author' do
+			within("\#edit_author_#{test.id}") do
+				click_button "delete"
+			end
+			expect(page).to have_content('Authors')
+			expect(page).not_to have_content('Test')
 		end
 	end
 	describe 'new page' do
