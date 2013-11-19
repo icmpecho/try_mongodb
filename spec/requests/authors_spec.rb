@@ -24,6 +24,10 @@ describe "Authors" do
 			expect(page).to have_content('Authors')
 			expect(page).not_to have_content('Test')
 		end
+		it 'have a link to create new author page' do
+			click_link "Create new"
+			expect(page).to have_content('New Author')
+		end
 	end
 	describe 'new page' do
 		before {
