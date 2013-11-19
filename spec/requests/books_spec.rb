@@ -13,4 +13,24 @@ describe "Books" do
 			expect(page).to have_content('Baz')
 		end
 	end
+	describe 'new page' do
+		before {
+			visit new_book_path
+		}
+		it 'land on correct page' do
+			expect(page).to have_content('New Book')
+		end
+		it 'can create book and redirect to index' do
+			fill_in 'Name', with: 'Bar'
+			click_button 'Create'
+			expect(page).to have_content('Books')
+			expect(page).to have_content('Bar')
+		end
+		it 'cannot create duplicate book and redirect to new' do
+			FactoryGirl.create(:book, name: 'Foo')
+			fill_in 'Name', with: 'Foo'
+			click_button 'Create'
+			expect(page).to have_content('New Book')
+		end
+	end
 end
